@@ -129,6 +129,7 @@ func deserializePod(ar *v1beta1.AdmissionReview) (corev1.Pod, error) {
 	pod := corev1.Pod{}
 	err := json.Unmarshal(ar.Request.Object.Raw, &pod)
 	/* fix for missing "default" namespace */
+	glog.Infof("unmarshalled pod object: %v", pod)
 	if pod.ObjectMeta.Namespace == "" {
 		pod.ObjectMeta.Namespace = "default"
 	}
